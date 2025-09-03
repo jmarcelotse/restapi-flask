@@ -15,8 +15,8 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
-  - name: shell
-    image: ubuntu
+  - name: python
+    image: python:3.9.12-alpine3.15
     command:
     - sleep
     args:
@@ -29,16 +29,22 @@ spec:
             // container('shell') {
             //     sh 'hostname'
             // }
-            defaultContainer 'shell'
-            retries 2
+            // defaultContainer 'shell'
+            // retries 2
         }
     }
     stages {
-        stage('Main') {
+        stage('Unit Tests') {
+            container('python') {
             steps {
-                sh 'hostname'
-                sh 'cat /etc/os-release'
-                sh 'ls -lah'
+                sh ```
+                    pip install requirements.txt
+                    bandit -r . -x '/.venv/','/tests/'
+                    black .
+                    flake8 . --exclude .venv
+                    pytest -v --disable-warnings
+
+                ```
             }
         }
     }
