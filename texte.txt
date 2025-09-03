@@ -3,3 +3,12 @@ teste 2
 teste 3
 tetse 4
 teste 5
+teste para o git
+
+=== TESTE WEBHOOK GITHUB → JENKINS ===
+Data: $(date)
+Objetivo: Verificar se alteração dispara pipeline
+Status: Testando comunicação GitHub + Jenkins
+Webhook: http://jenkins.localhost.com/github-webhook/
+Pipeline: Multibranch esperado para executar
+==========================================
