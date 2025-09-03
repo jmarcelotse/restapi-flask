@@ -14,6 +14,11 @@ spec:
     - infinity
     securityContext:
       runAsUser: 1000
+    env:
+    - name: HOME
+      value: "/tmp/jenkins"
+    - name: PIP_USER
+      value: "1"
 '''
         }
     }
@@ -22,14 +27,31 @@ spec:
             steps {
                 container('python') {
                     sh '''
-                        pip install -r requirements.txt
+                        mkdir -p $HOME/.local/bin
+                        export PATH="$HOME/.local/bin:$PATH"
+                        
+                        pip install --user --upgrade pip
+                        pip install --user -r requirements.txt
+                        pip install --user setuptools
 
-                        bandit -r . -x './.venv/','./tests/'
+                        bandit -r . -x './venv/,./tests/'
                         black .
                         pytest -v --disable-warnings
                     '''
                 }
             }
+        }
+    }
+    
+    post {
+        always {
+            echo 'Pipeline completed!'
+        }
+        success {
+            echo 'All quality gates passed!'
+        }
+        failure {
+            echo 'Pipeline failed - check quality gates'
         }
     }
 }
