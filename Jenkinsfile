@@ -14,6 +14,11 @@ spec:
     - infinity
     securityContext:
       runAsUser: 1000
+    env:
+    - name: PIP_USER
+      value: "1"
+    - name: PATH
+      value: "/home/jenkins/.local/bin:$PATH"
 '''
         }
     }
@@ -22,9 +27,9 @@ spec:
             steps {
                 container('python') {
                     sh '''
-                        pip install --upgrade pip
-                        pip install -r requirements.txt
-                        pip install setuptools
+                        pip install --user --upgrade pip
+                        pip install --user -r requirements.txt
+                        pip install --user setuptools
                     '''
                 }
             }
@@ -34,7 +39,7 @@ spec:
             steps {
                 container('python') {
                     sh '''
-                        pytest -v --disable-warnings
+                        python -m pytest -v --disable-warnings
                     '''
                 }
             }
@@ -44,7 +49,7 @@ spec:
             steps {
                 container('python') {
                     sh '''
-                        bandit -r . -x './venv/,./tests/'
+                        python -m bandit -r . -x './venv/,./tests/'
                     '''
                 }
             }
@@ -54,7 +59,7 @@ spec:
             steps {
                 container('python') {
                     sh '''
-                        black --check .
+                        python -m black --check .
                     '''
                 }
             }
