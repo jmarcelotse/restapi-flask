@@ -8,30 +8,35 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/')
+
+@app.route("/")
 def home():
-    return jsonify({
-        'message': 'Flask App CI/CD Test',
-        'status': 'running',
-        'version': '1.0.0',
-        'build': os.environ.get('BUILD_NUMBER', 'dev')
-    })
+    return jsonify(
+        {
+            "message": "Flask App CI/CD Test",
+            "status": "running",
+            "version": "1.0.0",
+            "build": os.environ.get("BUILD_NUMBER", "dev"),
+        }
+    )
 
-@app.route('/health')
+
+@app.route("/health")
 def health():
-    return jsonify({
-        'status': 'healthy',
-        'service': 'flask-app'
-    }), 200
+    return jsonify({"status": "healthy", "service": "flask-app"}), 200
 
-@app.route('/info')
+
+@app.route("/info")
 def info():
-    return jsonify({
-        'app': 'Flask CI/CD Test',
-        'python_version': '3.9',
-        'framework': 'Flask',
-        'pipeline': 'Jenkins + GitHub'
-    })
+    return jsonify(
+        {
+            "app": "Flask CI/CD Test",
+            "python_version": "3.9",
+            "framework": "Flask",
+            "pipeline": "Jenkins + GitHub",
+        }
+    )
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
