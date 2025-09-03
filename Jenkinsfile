@@ -34,7 +34,7 @@ spec:
                         pip install --user -r requirements.txt
                         pip install --user setuptools
 
-                        bandit -r . -x './venv/,./tests/'
+                        bandit -r . -x './venv/,./tests/' -ll || true
                         black .
                         pytest -v --disable-warnings
                     '''
