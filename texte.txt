@@ -6,11 +6,12 @@ teste 5
 teste para o git
 
 === TESTE WEBHOOK GITHUB → JENKINS ===
-Data: $(date)
+Data: 2025-01-03 12:30:15
 Objetivo: Verificar se alteração dispara pipeline
-Status: Testando comunicação GitHub + Jenkins
+Status: NOVO TESTE - Validando trigger automático
 Webhook: http://jenkins.localhost.com/github-webhook/
 Pipeline: Multibranch esperado para executar
+Build esperado: #8
 ==========================================
 
-teste
+teste webhook funcionando
