@@ -29,12 +29,12 @@ spec:
                     sh '''
                         mkdir -p $HOME/.local/bin
                         export PATH="$HOME/.local/bin:$PATH"
-                        
+
                         pip install --user --upgrade pip
                         pip install --user -r requirements.txt
                         pip install --user setuptools
 
-                        bandit -r . -x './venv/,./tests/' -ll || true
+                        bandit -r . -x './venv/,./tests/'
                         black .
                         pytest -v --disable-warnings
                     '''
@@ -42,7 +42,7 @@ spec:
             }
         }
     }
-    
+
     post {
         always {
             echo 'Pipeline completed!'
