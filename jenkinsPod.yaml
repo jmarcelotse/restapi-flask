@@ -57,7 +57,7 @@ spec:
       - name: jenkins-artifacts
         mountPath: /artifacts
   hostAliases:
-  - ip: "172.21.0.50"
+  - ip: "172.18.0.50"
     hostnames:
     - "gitea.localhost.com"
     - "sonarqube.localhost.com"
