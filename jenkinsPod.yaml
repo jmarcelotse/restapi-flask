@@ -10,7 +10,7 @@ spec:
     args:
     - infinity
   - name: sonar-scanner-cli
-    image: sonarsource/sonar-scanner-cli:5.0.1
+    image: sonarsource/sonar-scanner-cli:latest
     command:
     - sleep
     args:
