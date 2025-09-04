@@ -15,3 +15,4 @@ Build esperado: #8
 ==========================================
 
 teste webhook funcionando 3
+|| true
