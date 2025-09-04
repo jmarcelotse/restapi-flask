@@ -24,7 +24,7 @@ spec:
     volumeMounts:
       - name: harbor-credentials
         mountPath: /kaniko/.docker
-      - name: jenkins-artifacts
+      - name: jenkins
         mountPath: /artifacts
   - name: alpine
     image: alpine
@@ -33,7 +33,7 @@ spec:
     args:
     - infinity
     volumeMounts:
-      - name: jenkins-artifacts
+      - name: jenkins
         mountPath: /artifacts
   - name: crane
     image: gcr.io/go-containerregistry/crane:debug
@@ -45,7 +45,7 @@ spec:
       - name: harbor-credentials
         mountPath: /root/.docker/config.json
         subPath: config.json
-      - name: jenkins-artifacts
+      - name: jenkins
         mountPath: /artifacts
   - name: helm
     image: alpine/helm:3.14.2
@@ -54,7 +54,7 @@ spec:
     args:
     - infinity
     volumeMounts:
-      - name: jenkins-artifacts
+      - name: jenkins
         mountPath: /artifacts
   hostAliases:
   - ip: "172.18.0.50"
@@ -69,6 +69,6 @@ spec:
         items:
           - key: .dockerconfigjson
             path: config.json
-    - name: jenkins-artifacts
+    - name: jenkins
       persistentVolumeClaim:
-        claimName: jenkins-artifacts
+        claimName: jenkins
