@@ -1,25 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: python
-    image: python:3.9.12-alpine3.15
-    command:
-    - sleep
-    args:
-    - infinity
-    securityContext:
-      runAsUser: 1000
-    env:
-    - name: HOME
-      value: "/tmp/jenkins"
-    - name: PIP_USER
-      value: "1"
-'''
+            yamlFile 'jenkins-pod.yaml'
         }
     }
     stages {
