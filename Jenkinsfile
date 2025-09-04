@@ -42,13 +42,13 @@ spec:
             }
             when {
                 anyOf {
-                    branch pattern: "feature-*"
-                    branch pattern: "develop"
-                    branch pattern: "hotfix-*"
-                    branch pattern: "release-*"
-                    branch pattern: "v"
+                    branch 'feature-*'
+                    branch 'develop'
+                    branch 'hotfix-*'
+                    branch 'release-*'
+                    branch 'main'
+                }
             }
-        }
     }
 
     post {
